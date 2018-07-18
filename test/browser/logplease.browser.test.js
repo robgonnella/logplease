@@ -161,15 +161,35 @@ describe('logplease', function() {
       done()
     })
 
-    it('writes timestamp', (done) => {
+    it('writes timestamp in iso time', (done) => {
       let out = ''
       let old = console.log
+      let isoTime = new Date().toISOString().slice(0, 19)
       console.log = (d) => out += d
       const log = Logger.create('test1')
       log.debug("hi")
       console.log = old
       assert.equal(out.split(" ").length, 4)
       assert.equal(out.split(" ")[3], '%chi')
+      let loggedTime = out.split(" ")[0].replace('%c', '').slice(0, 19)
+      assert.equal(isoTime, loggedTime)
+      done()
+    })
+
+    it('writes timestamp in local time', (done) => {
+      let out = ''
+      let old = console.log
+      let localTime = new Date().toLocaleString()
+      console.log = (d) => out += d
+      const log = Logger.create('test1', {useLocalTime: true})
+      log.debug("hi")
+      console.log = old
+      let logArray = out.split(" ")
+      // two extra spaces in local time increases length
+      assert.equal(logArray.length, 6)
+      assert.equal(logArray[5], '%chi')
+      let loggedTime = logArray.slice(0, 3).join(' ').replace('%c', '')
+      assert.equal(localTime, loggedTime)
       done()
     })
 
