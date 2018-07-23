@@ -149,9 +149,23 @@ Black, Red, Green, Yellow, Blue, Magenta, Cyan, Grey, White
 ```
 
 ### Tests
-Run tests with:
+Run all tests with:
+
 ```
-npm test
+npm run test-all
+```
+
+Run terminal tests with:
+
+```
+npm run test
+```
+
+Run browser tests with:
+
+```
+# Specifiy HEADLESS=1 or HEADLESS=true to run these tests in a headless browser
+npm run test-browser
 ```
 
 ### Build
