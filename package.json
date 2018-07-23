@@ -5,6 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha",
+    "test-browser": "node run-tests-in-browser.js && mocha test/browser/compare-snapshots.test.js",
+    "test-all": "npm run test && npm run test-browser",
     "example": "node example/example.js",
     "build": "npm run build:dist && npm run build:examples && npm run build:es5",
     "build:dist": "./node_modules/.bin/webpack --config webpack.config.js",
@@ -36,7 +38,10 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "buffer": "^5.0.7",
+    "chai": "^4.1.2",
+    "looks-same": "^3.3.0",
     "mocha": "^3.5.0",
+    "puppeteer": "^1.6.0",
     "webpack": "^3.5.5"
   }
 }
